@@ -7,6 +7,9 @@ import $ from 'jquery';
 const ShirtInfo = Backbone.View.extend({
 	tagName: 'section',
 	className: 'image-wrapper',
+	events: {
+		'click .rotate': 'onFlipClick'
+	},
 	initialize: function(frontPic, backPic, picTitle, price) {
 		this.frontPic = frontPic;
 		this.backPic = backPic;
@@ -16,7 +19,7 @@ const ShirtInfo = Backbone.View.extend({
 	},
 	render: function() {
 		const template = `
-				<i class="fa fa-refresh"></i>
+				<i class="fa fa-refresh rotate"></i>
 				<img class="frontPic" src="${this.frontPic}">
 				<img class="backPic" src="${this.backPic}">
 				<ul class="icons">
@@ -30,6 +33,9 @@ const ShirtInfo = Backbone.View.extend({
 				<div class="price">${this.price}</div>
 		`;
 		this.$el.append(template);
+	},
+	onFlipClick: function() {
+		console.log('button clicked');
 	}
 });
 
