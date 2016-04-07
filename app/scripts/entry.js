@@ -1,17 +1,12 @@
 // import the stylesheet. this is necessary so that webpack will compile all the sass into css and then build it into our style.css file
 import './../styles/main.scss';
 
-// import a module from another file.
-import tiy from './app.js';
-
-// Looks like the imported module was a function, because here we're executing it!
-tiy();
-
 import Backbone from 'backbone';
 import $ from 'jquery';
 
 const ShirtInfo = Backbone.View.extend({
 	tagName: 'section',
+	className: 'image-wrapper',
 	initialize: function(frontPic, backPic, picTitle, price) {
 		this.frontPic = frontPic;
 		this.backPic = backPic;
@@ -20,11 +15,21 @@ const ShirtInfo = Backbone.View.extend({
 		this.render();
 	},
 	render: function() {
-		const $frontPhoto = $('<img />', {src: this.frontPic, class: 'frontPic'});
-		const $backPhoto = $('<img />', {src: this.backPic, class: 'backPic'});
-		const $picTitle = $('<div />', {text: this.picTitle, class: 'picTitle'});
-		const $price = $('<div />', {text: this.price, class: 'price'});
-		this.$el.append($frontPhoto).append($backPhoto).append($picTitle).append($price);
+		const template = `
+				<i class="fa fa-refresh"></i>
+				<img class="frontPic" src="${this.frontPic}">
+				<img class="backPic" src="${this.backPic}">
+				<ul class="icons">
+					<li><i class="fa fa-retweet"></i></li><!--
+					--><li><i class="fa fa-heart-o"></i></li><!--
+					--><li><h5>XL</h5></li><!--
+					--><li><div class="colorChoice"></div></li><!--
+					--><li><i class="fa fa-shopping-cart"></i></li>
+				</ul>
+				<div class="picTitle">${this.picTitle}</div>
+				<div class="price">${this.price}</div>
+		`;
+		this.$el.append(template);
 	}
 });
 
